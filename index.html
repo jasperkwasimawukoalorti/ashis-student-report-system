@@ -5381,10 +5381,10 @@ Programme: ${student.programme}
 Day/Boarding: ${student.boardingStatus || 'N/A'}
 
 📚 CORE SUBJECTS:
-${student.coreSubjects.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+${(student.coreSubjects || []).map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
 📖 ELECTIVE SUBJECTS:
-${student.electiveSubjects.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+${(student.electiveSubjects || []).map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
 📅 Registered: ${new Date(student.registeredDate).toLocaleString()}
     `;
@@ -5583,10 +5583,10 @@ function generateReportPreview() {
 
     // Form 3 students drop Physical Education & Health
     const _isForm3 = String(student.form).trim() === '3';
-    const _filteredCore = student.coreSubjects.filter(s =>
+    const _filteredCore = (student.coreSubjects || []).filter(s =>
         !(_isForm3 && s === 'Physical Education & Health')
     );
-    const allSubjects = [..._filteredCore, ...student.electiveSubjects];
+    const allSubjects = [..._filteredCore, ...(student.electiveSubjects || [])];
     const photoUrl = studentPhotos[String(studentId)] || '';
 
     let totalScore = 0;
@@ -5675,7 +5675,7 @@ function generateReportPreview() {
     `;
 
     // Core Subjects — Form 3 students drop Physical Education & Health
-    const coreSubjectsToRender = student.coreSubjects.filter(subject =>
+    const coreSubjectsToRender = (student.coreSubjects || []).filter(subject =>
         !(_isForm3 && subject === 'Physical Education & Health')
     );
 
@@ -5700,7 +5700,7 @@ function generateReportPreview() {
                 <td>${subjectScore.examScore || 0}</td>
                 <td><strong>${total}</strong></td>
                 <td class="${gradeInfo.class}">${gradeInfo.grade}</td>
-                <td><strong>${getRankSuffix(ranking.rank)}/${ranking.totalStudents}</strong></td>
+                <td><strong>${ranking ? getRankSuffix(ranking.rank) + '/' + ranking.totalStudents : 'N/A'}</strong></td>
                 <td>${subjectScore.initials || '-'}</td>
             </tr>
         `;
@@ -5708,7 +5708,7 @@ function generateReportPreview() {
 
     // Elective Subjects
     marksTableHTML += '<tr class="section-header"><td colspan="7">ELECTIVE SUBJECTS</td></tr>';
-    student.electiveSubjects.forEach(subject => {
+    (student.electiveSubjects || []).forEach(subject => {
         const subjectScore = scores[String(studentId)] && scores[String(studentId)][subject] 
             ? scores[String(studentId)][subject] 
             : { classScore: 0, examScore: 0, initials: '-' };
@@ -5728,7 +5728,7 @@ function generateReportPreview() {
                 <td>${subjectScore.examScore || 0}</td>
                 <td><strong>${total}</strong></td>
                 <td class="${gradeInfo.class}">${gradeInfo.grade}</td>
-                <td><strong>${getRankSuffix(ranking.rank)}/${ranking.totalStudents}</strong></td>
+                <td><strong>${ranking ? getRankSuffix(ranking.rank) + '/' + ranking.totalStudents : 'N/A'}</strong></td>
                 <td>${subjectScore.initials || '-'}</td>
             </tr>
         `;
@@ -6801,7 +6801,7 @@ function downloadStudentsCSV() {
     let csv = 'Name,Index,DOB,Gender,House,Form,Programme,Core Subjects,Elective Subjects\n';
     
     students.forEach(student => {
-        csv += `"${student.name}","${student.index}","${student.dob}","${student.gender}","${student.house || 'N/A'}","${student.form}","${student.programme}","${student.coreSubjects.join('; ')}","${student.electiveSubjects.join('; ')}"\n`;
+        csv += `"${student.name}","${student.index}","${student.dob}","${student.gender}","${student.house || 'N/A'}","${student.form}","${student.programme}","${(student.coreSubjects || []).join('; ')}","${(student.electiveSubjects || []).join('; ')}"\n`;
     });
 
     downloadCSV(csv, 'Students_Export.csv');
