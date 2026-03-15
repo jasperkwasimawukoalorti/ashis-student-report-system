@@ -1657,6 +1657,15 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
                     <small class="helper-text">This will appear on report cards</small>
                 </div>
 
+                <div class="form-group">
+                    <label>Gender *</label>
+                    <select id="signupGender">
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
 <!-- In Signup Form - replace password fields -->
 <div class="form-group">
     <label>Password *</label>
@@ -3109,6 +3118,7 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
                 <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 5px; text-align: center;">
                     <div style="font-size: 32px; font-weight: bold;" id="statsTeachers">0</div>
                     <div style="font-size: 14px;">Total Teachers</div>
+                    <div style="font-size: 11px; margin-top: 4px;" id="statsTeachersGender"></div>
                 </div>
                 <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 5px; text-align: center;">
                     <div style="font-size: 32px; font-weight: bold;" id="statsScores">0</div>
@@ -3143,34 +3153,6 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
                 <button class="btn btn-warning" onclick="importData()">📥 Import Backup File (JSON)</button>
                 <button class="btn btn-info" onclick="importDataFromCSV()">📊 Import from CSV</button>
             </div>
-        </div>
-
-        <!-- Promote Students -->
-        <div class="card" style="border: 2px solid #667eea;">
-            <h3 style="margin-bottom: 15px; color: #667eea;">🎓 Promote Students</h3>
-            <p style="margin-bottom: 15px;">Advance students to the next form at the end of the academic year. Form 3 students will be graduated and removed from the system.</p>
-            <div class="alert alert-warning">
-                <strong>⚠️ Important:</strong> This action moves all students up one form. Form 1 → Form 2, Form 2 → Form 3, Form 3 → Graduated. All scores are cleared for the new year. This cannot be undone — take a backup first!
-            </div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Promote which form?</label>
-                    <select id="promoteFormSelect">
-                        <option value="all">All Forms (Form 1→2, Form 2→3, Form 3 Graduated)</option>
-                        <option value="1">Form 1 → Form 2 only</option>
-                        <option value="2">Form 2 → Form 3 only</option>
-                        <option value="3">Form 3 → Graduate (Remove) only</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Clear scores after promotion?</label>
-                    <select id="promoteClearScores">
-                        <option value="yes">Yes — clear all scores (new academic year)</option>
-                        <option value="no">No — keep existing scores</option>
-                    </select>
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="promoteStudents()">🎓 Promote Students</button>
         </div>
 
         <!-- Clear All Data -->
@@ -4577,11 +4559,17 @@ function displayOverallFormRanking(formNumber, container) {
                 name: name,
                 email: email,
                 initials: initials,
+                gender: document.getElementById('signupGender').value,
                 password: password,
                 subjects: [],
                 status: 'pending',
                 registeredDate: new Date().toISOString()
             };
+
+            if (!teacher.gender) {
+                alert('❌ Please select your gender!');
+                return;
+            }
 
             teachers.push(teacher);
             localStorage.setItem('teachers', JSON.stringify(teachers));
@@ -4592,6 +4580,7 @@ function displayOverallFormRanking(formNumber, container) {
             document.getElementById('signupName').value = '';
             document.getElementById('signupEmail').value = '';
             document.getElementById('signupInitials').value = '';
+            document.getElementById('signupGender').value = '';
             document.getElementById('signupPassword').value = '';
             document.getElementById('signupConfirmPassword').value = '';
             
@@ -6395,6 +6384,13 @@ function updateBackupStats() {
 
     if (statsStudents) statsStudents.textContent = students.length;
     if (statsTeachers) statsTeachers.textContent = teachers.length;
+
+    const statsTeachersGender = document.getElementById('statsTeachersGender');
+    if (statsTeachersGender) {
+        const maleTch   = teachers.filter(t => (t.gender || '').toLowerCase() === 'male').length;
+        const femaleTch = teachers.filter(t => (t.gender || '').toLowerCase() === 'female').length;
+        statsTeachersGender.textContent = `♂ ${maleTch} Male | ♀ ${femaleTch} Female`;
+    }
     
     let scoreCount = 0;
     Object.keys(scores).forEach(studentId => {
@@ -6559,96 +6555,6 @@ function clearAllData() {
 
     alert('✅ All data has been deleted.\n\nThe page will now reload and you will need to log in again.');
     location.reload();
-}
-
-function promoteStudents() {
-    const formSelect   = document.getElementById('promoteFormSelect').value;
-    const clearScores  = document.getElementById('promoteClearScores').value === 'yes';
-
-    if (students.length === 0) {
-        alert('❌ No students registered in the system.');
-        return;
-    }
-
-    // Build summary for confirmation
-    const form1Count = students.filter(s => String(s.form) === '1').length;
-    const form2Count = students.filter(s => String(s.form) === '2').length;
-    const form3Count = students.filter(s => String(s.form) === '3').length;
-
-    let summaryLines = [];
-    if (formSelect === 'all' || formSelect === '1') summaryLines.push(`• ${form1Count} Form 1 students → Form 2`);
-    if (formSelect === 'all' || formSelect === '2') summaryLines.push(`• ${form2Count} Form 2 students → Form 3`);
-    if (formSelect === 'all' || formSelect === '3') summaryLines.push(`• ${form3Count} Form 3 students → Graduated (removed)`);
-    if (clearScores) summaryLines.push(`• All scores will be cleared`);
-
-    const confirmed = confirm(
-        `🎓 STUDENT PROMOTION SUMMARY\n\n` +
-        summaryLines.join('\n') +
-        `\n\nThis cannot be undone. Proceed?`
-    );
-
-    if (!confirmed) {
-        alert('❌ Promotion cancelled.');
-        return;
-    }
-
-    let promoted1 = 0, promoted2 = 0, graduated = 0;
-    const graduatedIds = [];
-
-    // Process promotions
-    students = students.map(student => {
-        const form = String(student.form).trim();
-
-        if ((formSelect === 'all' || formSelect === '3') && form === '3') {
-            graduatedIds.push(String(student.id));
-            graduated++;
-            return null; // mark for removal
-        }
-        if ((formSelect === 'all' || formSelect === '2') && form === '2') {
-            promoted2++;
-            return { ...student, form: '3' };
-        }
-        if ((formSelect === 'all' || formSelect === '1') && form === '1') {
-            promoted1++;
-            return { ...student, form: '2' };
-        }
-        return student;
-    }).filter(s => s !== null);
-
-    // Clear scores for graduated students
-    graduatedIds.forEach(id => {
-        delete scores[id];
-        delete studentPhotos[id];
-        fbDelete(COL_STUDENTS, id).catch(e => console.warn('Firestore graduate remove:', e));
-        fbDelete(COL_SCORES,   id).catch(e => console.warn('Firestore scores remove:', e));
-    });
-
-    // Clear all scores if selected
-    if (clearScores) {
-        scores = {};
-        localStorage.setItem('scores', JSON.stringify(scores));
-    }
-
-    // Save updated students to localStorage and Firestore
-    localStorage.setItem('students', JSON.stringify(students));
-
-    // Sync promoted students to Firestore
-    students.forEach(student => {
-        fbSave(COL_STUDENTS, student.id, student).catch(e => console.warn('Firestore promote sync:', e));
-    });
-
-    // Update UI
-    updateReportStudentDropdown();
-    displayStudentList();
-    updateBackupStats();
-
-    alert(
-        `✅ PROMOTION COMPLETE!\n\n` +
-        (promoted1 > 0 ? `• ${promoted1} student(s) promoted to Form 2\n` : '') +
-        (promoted2 > 0 ? `• ${promoted2} student(s) promoted to Form 3\n` : '') +
-        (graduated > 0 ? `• ${graduated} Form 3 student(s) graduated and removed\n` : '') +
-        (clearScores   ? `• All scores have been cleared for the new year` : '')
-    );
 }
 
 
