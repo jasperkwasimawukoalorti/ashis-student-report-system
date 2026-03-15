@@ -1687,11 +1687,7 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
                 <button class="btn btn-success" style="width: 100%; margin-top: 20px;" onclick="signupTeacher()">📝 Register as Teacher</button>
                 
             </div>
-        </div>
-    </div>
-    
-    
-    
+
 <!-- Forgot Password Form -->
 <div id="forgotPasswordForm" class="hidden">
     <div class="alert alert-info" style="font-size: 12px; font-weight: normal;">
@@ -1783,6 +1779,9 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
         </a>
     </div>
 </div>
+
+        </div>
+    </div>
     <!-- Main App -->
     <div id="mainApp" class="hidden">
         <!-- Header -->
@@ -2926,21 +2925,45 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
 
             <div class="form-group">
                 <label>Class Patron's Remarks</label>
+                <div class="btn-group" style="margin-bottom: 8px;">
+                    <button class="btn btn-info" onclick="insertSampleRemark('classPatron', 'excellent')">Excellent</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('classPatron', 'good')">Good</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('classPatron', 'satisfactory')">Satisfactory</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('classPatron', 'needsImprovement')">Needs Improvement</button>
+                </div>
                 <textarea id="classPatronRemarks" rows="2" placeholder="Enter class patron's comments..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Housemaster's/Housemistress' Remarks</label>
+                <div class="btn-group" style="margin-bottom: 8px;">
+                    <button class="btn btn-info" onclick="insertSampleRemark('housemaster', 'excellent')">Excellent</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('housemaster', 'good')">Good</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('housemaster', 'satisfactory')">Satisfactory</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('housemaster', 'needsImprovement')">Needs Improvement</button>
+                </div>
                 <textarea id="housemasterRemarks" rows="2" placeholder="Enter housemaster's/housemistress' comments..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Senior Housemaster's/Housemistress' Remarks</label>
+                <div class="btn-group" style="margin-bottom: 8px;">
+                    <button class="btn btn-info" onclick="insertSampleRemark('seniorHousemaster', 'excellent')">Excellent</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('seniorHousemaster', 'good')">Good</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('seniorHousemaster', 'satisfactory')">Satisfactory</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('seniorHousemaster', 'needsImprovement')">Needs Improvement</button>
+                </div>
                 <textarea id="seniorHousemasterRemarks" rows="2" placeholder="Enter senior housemaster's/housemistress' comments..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Assistant Headmaster's (Academic) Remarks</label>
+                <div class="btn-group" style="margin-bottom: 8px;">
+                    <button class="btn btn-info" onclick="insertSampleRemark('asstHeadmaster', 'excellent')">Excellent</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('asstHeadmaster', 'good')">Good</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('asstHeadmaster', 'satisfactory')">Satisfactory</button>
+                    <button class="btn btn-info" onclick="insertSampleRemark('asstHeadmaster', 'needsImprovement')">Needs Improvement</button>
+                </div>
                 <textarea id="asstHeadmasterRemarks" rows="2" placeholder="Enter assistant headmaster's (academic) comments..."></textarea>
             </div>
 
@@ -4844,15 +4867,22 @@ function switchTab(tabName) {
                 const statusBadge = teacher.subjects.length > 0 
                     ? '<span class="badge badge-success">Active</span>' 
                     : '<span class="badge badge-warning">Pending</span>';
+
+                const photoHtml = teacher.photo
+                    ? `<img src="${teacher.photo}" style="width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #667eea;flex-shrink:0;">`
+                    : `<div style="width:50px;height:50px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👤</div>`;
                 
                 html += `
                     <div class="teacher-card">
                         <div class="teacher-info">
-                            <div>
-                                <strong>${teacher.name}</strong> ${statusBadge}<br>
-                                <small>Email: ${teacher.email} | Initials: ${teacher.initials}</small>
-                                <div class="teacher-subjects">
-                                    <strong>Assigned Subjects:</strong> ${teacher.subjects.length > 0 ? teacher.subjects.join(', ') : 'None assigned yet'}
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                ${photoHtml}
+                                <div>
+                                    <strong>${teacher.name}</strong> ${statusBadge}<br>
+                                    <small>Email: ${teacher.email} | Initials: ${teacher.initials}</small>
+                                    <div class="teacher-subjects">
+                                        <strong>Assigned Subjects:</strong> ${teacher.subjects.length > 0 ? teacher.subjects.join(', ') : 'None assigned yet'}
+                                    </div>
                                 </div>
                             </div>
                             <div class="btn-group">
@@ -6525,7 +6555,7 @@ const sampleRemarks = {
             "Good academic standing. With more focus, can achieve excellence.",
             "Satisfactory performance with room for improvement in weaker areas."
         ],
-        average: [
+        satisfactory: [
             "Average performance. More effort needed in weaker subjects.",
             "Fair results. Should dedicate more time to studies for better outcomes.",
             "Shows potential but needs to work harder to improve grades.",
@@ -6538,6 +6568,126 @@ const sampleRemarks = {
             "Unsatisfactory results. Parent/guardian conference recommended.",
             "Must work harder and seek help from teachers when needed.",
             "Performance below expectation. Serious effort required immediately."
+        ]
+    },
+    classPatron: {
+        excellent: [
+            "Exemplary conduct and dedication. A role model for peers.",
+            "Outstanding behaviour and participation. Keep it up!",
+            "Excellent character and discipline. The class is proud of you.",
+            "Model student in conduct and attitude. Highly commendable!",
+            "Exceptional engagement in class activities. Well done!"
+        ],
+        good: [
+            "Good behavior and participation in class activities.",
+            "Commendable conduct. Keep up the positive attitude.",
+            "Good engagement with peers and class activities.",
+            "Behaves well and contributes positively to the class.",
+            "Solid character and attitude. Continue this trend."
+        ],
+        satisfactory: [
+            "Acceptable conduct. Should be more engaged in class activities.",
+            "Fair behavior. More active participation is encouraged.",
+            "Satisfactory conduct but can show more initiative.",
+            "Moderate engagement. Should strive to contribute more.",
+            "Decent behavior. Needs to be more involved in activities."
+        ],
+        needsImprovement: [
+            "Needs to improve participation and attitude towards learning.",
+            "Conduct requires significant improvement. Take this seriously.",
+            "Poor engagement in class activities. Must do better.",
+            "Attitude towards class activities is unsatisfactory.",
+            "Requires improvement in discipline and participation."
+        ]
+    },
+    housemaster: {
+        excellent: [
+            "Outstanding member of the house. Actively participates in house activities.",
+            "Exemplary house member. A true ambassador for the house.",
+            "Excellent conduct and contribution to house activities. Well done!",
+            "A shining example within the house. Keep up the great work!",
+            "Outstanding participation and leadership in house programs."
+        ],
+        good: [
+            "Good house member. Regular participation in activities.",
+            "Commendable contribution to house events and programs.",
+            "Good conduct within the house. Continue the positive trend.",
+            "Active and well-behaved house member. Keep it up!",
+            "Good engagement in house activities. Aim higher!"
+        ],
+        satisfactory: [
+            "Fair contribution to house activities. Can do better.",
+            "Satisfactory conduct in the house. More involvement needed.",
+            "Adequate participation. Should be more active in house programs.",
+            "Moderate engagement in house activities. Needs improvement.",
+            "Acceptable house member. Should strive for more involvement."
+        ],
+        needsImprovement: [
+            "Needs to be more active in house programs and maintain discipline.",
+            "Poor participation in house activities. Must improve immediately.",
+            "Conduct in the house requires serious attention.",
+            "Unsatisfactory engagement. Must participate more actively.",
+            "Significant improvement needed in house conduct and participation."
+        ]
+    },
+    seniorHousemaster: {
+        excellent: [
+            "Excellent student showing leadership qualities. Keep up the good work.",
+            "Outstanding conduct and character. A pride of the house.",
+            "Exemplary student with exceptional discipline. Highly commendable!",
+            "Shows remarkable maturity and leadership. Well done!",
+            "An outstanding ambassador for the house. Continue excelling!"
+        ],
+        good: [
+            "Good progress noted. Continue striving for excellence.",
+            "Commendable conduct and engagement. Keep it up!",
+            "Good discipline and participation. Aim for excellence.",
+            "Well-behaved student with good values. Continue improving.",
+            "Good standing within the house. With more effort, can excel."
+        ],
+        satisfactory: [
+            "Satisfactory. More effort required for better results.",
+            "Fair conduct. Should demonstrate more discipline and initiative.",
+            "Adequate behavior. Needs to show more leadership qualities.",
+            "Moderate progress. More commitment to house values is expected.",
+            "Acceptable conduct. Should aspire to higher standards."
+        ],
+        needsImprovement: [
+            "Performance below standard. Needs immediate improvement.",
+            "Conduct requires urgent attention. Must improve discipline.",
+            "Unsatisfactory. Must take house rules and values more seriously.",
+            "Significant improvement needed in behavior and participation.",
+            "Poor standing. Serious intervention required for improvement."
+        ]
+    },
+    asstHeadmaster: {
+        excellent: [
+            "Academically strong student. Maintains high standards consistently.",
+            "Outstanding academic achievement. The school is proud of you!",
+            "Excellent performance and discipline. A model student.",
+            "Exceptional academic standing. Keep raising the bar!",
+            "Highly commendable academic conduct and achievement."
+        ],
+        good: [
+            "Commendable academic performance. Aim for excellence.",
+            "Good academic standing. Continue working hard.",
+            "Solid performance. With more dedication, excellence is achievable.",
+            "Good progress academically. The school encourages continued effort.",
+            "Commendable effort. Keep striving for better results."
+        ],
+        satisfactory: [
+            "Moderate academic achievement. Extra effort needed.",
+            "Satisfactory academic standing. Should aim higher.",
+            "Fair academic performance. More dedication is required.",
+            "Adequate results. Must work harder for better outcomes.",
+            "Acceptable academic performance but improvement is expected."
+        ],
+        needsImprovement: [
+            "Poor academic standing. Requires serious intervention.",
+            "Unsatisfactory academic performance. Must improve immediately.",
+            "Below academic expectations. Serious effort required.",
+            "Academic performance needs urgent attention and improvement.",
+            "Significant academic improvement required. Take studies seriously."
         ]
     },
     headmaster: {
@@ -6580,7 +6730,15 @@ function insertSampleRemark(type, category) {
     const randomRemark = remarks[Math.floor(Math.random() * remarks.length)];
     
     // Insert into appropriate textarea
-    const textareaId = type === 'classTeacher' ? 'classTeacherRemarks' : 'headmasterRemarks';
+    const textareaMap = {
+        classTeacher:     'classTeacherRemarks',
+        classPatron:      'classPatronRemarks',
+        housemaster:      'housemasterRemarks',
+        seniorHousemaster:'seniorHousemasterRemarks',
+        asstHeadmaster:   'asstHeadmasterRemarks',
+        headmaster:       'headmasterRemarks'
+    };
+    const textareaId = textareaMap[type] || 'classTeacherRemarks';
     const textarea = document.getElementById(textareaId);
     
     if (textarea) {
