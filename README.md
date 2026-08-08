@@ -220,8 +220,8 @@ All records sync to Firebase automatically, the same way student and teacher rec
 ## 9. Support and Contact
 
 - **School:** Atweaman Senior High School, P.O. Box 9, Atweaman, Ghana
-- **Email:** info@ASHIS.edu.gh
-- **Phone:** +233-XXX-XXX-XXX
+- **Email:** info@ashis.edu.gh
+- **Phone:** +233-208-598-037
 
 ---
 
