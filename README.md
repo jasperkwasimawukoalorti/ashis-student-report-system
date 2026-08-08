@@ -1,6 +1,6 @@
-# ASHS Academic Report System
+# ASHIS Academic Report System
 
-**Atweaman Senior High School** | Version 1.0 | 2024/2025
+**Atweaman Senior High School** | Version 1.1 | 2024/2025
 
 A web-based school management and academic reporting system. Runs entirely in a single HTML file powered by Firebase — no server installation required.
 
@@ -22,13 +22,14 @@ A web-based school management and academic reporting system. Runs entirely in a 
 
 ## 1. Overview
 
-The ASHS Academic Report System handles the full academic reporting cycle for Atweaman Senior High School:
+The ASHIS Academic Report System handles the full academic reporting cycle for Atweaman Senior High School:
 
 - Student and teacher registration
 - Score entry per subject (class score + exam score)
 - Automated grade calculation and ranking
 - A4-formatted printable report card generation
 - School-wide announcements and messaging
+- Teacher class attendance, school presence, and invigilator duty tracking
 
 All data is stored securely in Firebase (Firestore + Storage) and is accessible from any device with a modern browser.
 
@@ -39,12 +40,13 @@ All data is stored securely in Firebase (Firestore + Storage) and is accessible 
 | Feature | Description |
 |---|---|
 | Student Management | Register, edit, and delete students with photos. Import/export via CSV. Assign to forms, programmes, houses, and boarding status. |
-| Teacher Management | Register teachers with photos and signatures. Assign subjects and forms. Each teacher has their own login credentials. |
+| Teacher Management | Register teachers with photos and signatures. Assign subjects, forms, and roles — including Form Master/Class Teacher, House Master/Mistress (by house), Head of Department (by subject area), and Senior Housemaster/Mistress. |
 | Score Entry | Teachers enter class scores (30%) and exam scores (70%) per subject. Totals and grades are calculated automatically. |
 | Report Card Generation | Full A4 report cards with student photo, grading table, performance bar chart, staff remarks, and signature lines. Print or save as PDF. |
 | Class Rankings | Automatic ranking by total score within each form and programme. Includes overall and subject-specific views. |
 | Class Tests | Record and track class test scores separately from semester scores. |
 | Performance Analysis | Visual charts showing student and class performance trends across subjects. |
+| Teacher Attendance & Invigilator Tracking | Admin-only module covering: Class Attendance (per date/period), School Presence (daily sign-in/out), Invigilator Tracking (subject, type of test, venue, session, role — with edit/reset per assignment), and Reports & Export (summary views, CSV export, print). |
 | Backup and Restore | Export all school data to a JSON file. Restore from backup at any time. |
 | Announcements | Admin can post messages, timetables, and documents visible to all logged-in teachers. |
 | School Settings | Configure school name, address, logo, headmaster signature, grading remarks, and admin password. |
@@ -57,10 +59,10 @@ All data is stored securely in Firebase (Firestore + Storage) and is accessible 
 
 | Role | Login | Access Level |
 |---|---|---|
-| Administrator | Admin password (set in Settings) | Full access to all tabs: Students, Teachers, Scores, Reports, Rankings, Class Tests, Backup, Messages, Settings |
+| Administrator | Admin password (set in Settings) | Full access to all tabs: Students, Teachers, Scores, Reports, Rankings, Class Tests, Teacher Attendance, Backup, Messages, Settings |
 | Teacher | Registered email + password | Enter Scores, My Subject Rankings, Performance Analysis, Profile, Announcements (view only) |
 
-> **Note:** Teachers can only see and edit scores for subjects they are assigned to. They cannot access student records, other teachers' data, or school settings.
+> **Note:** Teachers can only see and edit scores for subjects they are assigned to. They cannot access student records, other teachers' data, school settings, or the Teacher Attendance module — that tab is visible to Administrators only.
 
 ---
 
@@ -101,6 +103,8 @@ service firebase.storage {
   }
 }
 ```
+
+> **Note:** The Teacher Attendance module stores its data in a new Firestore collection, `teacherAttendanceData` (documents: `classAttendance`, `presence`, `invigilators`). The security rules above already cover it, since they apply to all documents in the database.
 
 ---
 
@@ -144,7 +148,7 @@ Scores are calculated as: **Class Score (30%) + Exam Score (70%) = Total (100%)*
 ### 6.3 Registering Teachers (Admin)
 
 1. Go to **Manage Teachers**. Fill in the teacher's full name, employee ID, email, and phone.
-2. Assign subjects the teacher handles and the form(s) they are class master for.
+2. Assign subjects the teacher handles and the form(s) they are class master for — or select House Master/Mistress, Head of Department, or Senior Housemaster/Mistress instead, if applicable.
 3. Upload the teacher's photo and signature.
 4. Set a login password. The teacher will use their email and this password to log in.
 
@@ -169,6 +173,16 @@ Scores are calculated as: **Class Score (30%) + Exam Score (70%) = Total (100%)*
 2. Store the backup file safely.
 3. To restore, click **Upload Backup** and select your JSON backup file.
 
+### 6.7 Teacher Attendance & Invigilator Tracking (Admin)
+
+1. Go to the **Teacher Attendance** tab (visible to Administrators only).
+2. **Class Attendance** — select a date and period, mark each teacher Present/Absent/Late with an optional note, then click **Save**.
+3. **School Presence** — select a date, record each teacher's daily status, sign-in time, sign-out time, and remark, then click **Save**.
+4. **Invigilator Tracking** — click **Add Assignment** to log a subject, type of test, exam details, date, venue, session, assigned teacher, and role (Chief Invigilator, Invigilator, etc.). Use **Edit** to update an assignment or **Reset** to clear its attendance mark.
+5. **Reports & Export** — choose a report type and date range to generate a summary, then download as CSV or print.
+
+All records sync to Firebase automatically, the same way student and teacher records do — so data stays consistent across devices and browsers.
+
 ---
 
 ## 7. Technical Notes
@@ -180,8 +194,9 @@ Scores are calculated as: **Class Score (30%) + Exam Score (70%) = Total (100%)*
 | Photo Compression | Photos are automatically compressed to under 50 KB using canvas-based JPEG compression before upload. |
 | Offline Behaviour | The app requires an internet connection. All reads and writes go directly to Firebase. |
 | Browser Support | Chrome 90+, Firefox 88+, Edge 90+, Safari 14+. Internet Explorer is not supported. |
-| Print / PDF | Report cards are formatted for A4 paper. Use "Print to PDF" in the browser print dialog. |
-| Data Storage | All persistent data is in Firebase. localStorage is used only for session state (current user, theme). |
+| Print / PDF | Report cards and Teacher Attendance reports are formatted for A4 paper. Use "Print to PDF" in the browser print dialog. |
+| Data Storage | All persistent data is in Firebase. localStorage is used only for session state (current user, theme) and as a local read cache. |
+| Firestore Collections | `students`, `scores`, `teachers`, `settings`, `messages`, `teacherSessions`, `teacherAttendanceData` (added in v1.1). |
 | Security | Firestore and Storage are protected behind Firebase Anonymous Authentication. |
 
 ---
@@ -197,15 +212,17 @@ Scores are calculated as: **Class Score (30%) + Exam Score (70%) = Total (100%)*
 | Scores not saving | Check Firestore security rules allow authenticated writes. Confirm the teacher is assigned to that subject. |
 | Report card prints blank or cut off | Use Chrome or Edge. Set paper size to A4 and margins to Default or None in the print dialog. |
 | Teacher cannot log in | Confirm the teacher's email and password were set correctly in Manage Teachers. Passwords are case-sensitive. |
+| Teacher Attendance tab not visible | This tab is admin-only by design. Log in as Administrator to access it. |
+| Attendance/invigilator records missing on another device | Confirm both devices are online — records sync to Firestore on save. If one device was offline when data was entered, reopen the Teacher Attendance tab once back online to trigger a re-sync. |
 
 ---
 
 ## 9. Support and Contact
 
 - **School:** Atweaman Senior High School, P.O. Box 9, Atweaman, Ghana
-- **Email:** info@ashs.edu.gh
+- **Email:** info@ASHIS.edu.gh
 - **Phone:** +233-XXX-XXX-XXX
 
 ---
 
-*ASHS Academic Report System — Built for Atweaman Senior High School — 2024/2025*
+*ASHIS Academic Report System — Built for Atweaman Senior High School — 2024/2025*

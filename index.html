@@ -1846,6 +1846,7 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
                         <button class="nav-tab" onclick="switchTab('messages')" id="tabMessages">💬 Messages</button>
                         <button class="nav-tab" onclick="switchTab('teacherRankings')" id="tabTeacherRankings">🏆 My Subject Rankings</button>
                         <button class="nav-tab" onclick="switchTab('attendance')" id="tabAttendance">📅 Attendance</button>
+                        <button class="nav-tab" onclick="switchTab('teacherAttendance')" id="tabTeacherAttendance" style="display:none;">👩‍🏫 Teacher Attendance</button>
                         <button class="nav-tab" onclick="switchTab('settings')" id="tabSettings">⚙️ Settings</button>
                     </div>
 
@@ -2960,48 +2961,73 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
             </div>
             
             <div class="form-group">
-                <label>Form Master / Class Teacher</label>
+                <label>Form Master / Class Teacher / House Master-Mistress / HOD</label>
                 <select id="teacherFormMaster">
-                    <option value="">-- Not a Form Master --</option>
-                    <option value="1-General Science">Form 1 - General Science</option>
-                    <option value="1-Visual Arts">Form 1 - Visual Arts</option>
-                    <option value="1-General Arts 1">Form 1 - General Arts 1</option>
-                    <option value="1-General Arts 2">Form 1 - General Arts 2</option>
-                    <option value="1-General Arts 3">Form 1 - General Arts 3</option>
-                    <option value="1-General Arts 4">Form 1 - General Arts 4</option>
-                    <option value="1-General Arts 5">Form 1 - General Arts 5</option>
-                    <option value="1-Home Economics">Form 1 - Home Economics</option>
-                    <option value="1-Home Economics 1">Form 1 - Home Economics 1</option>
-                    <option value="1-Home Economics 2">Form 1 - Home Economics 2</option>
-                    <option value="1-Business">Form 1 - Business</option>
-                    <option value="1-Agriculture">Form 1 - Agriculture</option>
-                    <option value="2-General Science">Form 2 - General Science</option>
-                    <option value="2-Visual Arts">Form 2 - Visual Arts</option>
-                    <option value="2-General Arts 1">Form 2 - General Arts 1</option>
-                    <option value="2-General Arts 2">Form 2 - General Arts 2</option>
-                    <option value="2-General Arts 3">Form 2 - General Arts 3</option>
-                    <option value="2-General Arts 4">Form 2 - General Arts 4</option>
-                    <option value="2-General Arts 5">Form 2 - General Arts 5</option>
-                    <option value="2-Home Economics">Form 2 - Home Economics</option>
-                    <option value="2-Home Economics 1">Form 2 - Home Economics 1</option>
-                    <option value="2-Home Economics 2">Form 2 - Home Economics 2</option>
-                    <option value="2-Business">Form 2 - Business</option>
-                    <option value="2-Agriculture">Form 2 - Agriculture</option>
-                    <option value="3-General Science">Form 3 - General Science</option>
-                    <option value="3-Visual Arts">Form 3 - Visual Arts</option>
-                    <option value="3-General Arts 1">Form 3 - General Arts 1</option>
-                    <option value="3-General Arts 2">Form 3 - General Arts 2</option>
-                    <option value="3-General Arts 3">Form 3 - General Arts 3</option>
-                    <option value="3-General Arts 4">Form 3 - General Arts 4</option>
-                    <option value="3-General Arts 5">Form 3 - General Arts 5</option>
-                    <option value="3-Home Economics">Form 3 - Home Economics</option>
-                    <option value="3-Home Economics 1">Form 3 - Home Economics 1</option>
-                    <option value="3-Home Economics 2">Form 3 - Home Economics 2</option>
-                    <option value="3-Business">Form 3 - Business</option>
-                    <option value="3-Agriculture">Form 3 - Agriculture</option>
+                    <option value="">-- Not a Form Master / House Master-Mistress / HOD --</option>
+                    <option value="senior-housemaster">Senior Housemaster/Mistress</option>
+                    <optgroup label="── Houses (House Master/Mistress) ──">
+                        <option value="house-1 (Green)">House Master/Mistress — 1 (Green)</option>
+                        <option value="house-2 (Red)">House Master/Mistress — 2 (Red)</option>
+                        <option value="house-3 (Blue)">House Master/Mistress — 3 (Blue)</option>
+                        <option value="house-4 (Yellow)">House Master/Mistress — 4 (Yellow)</option>
+                    </optgroup>
+                    <optgroup label="── Head of Department (HOD) ──">
+                        <option value="hod-General Science">HOD — General Science</option>
+                        <option value="hod-General Arts">HOD — General Arts</option>
+                        <option value="hod-Business">HOD — Business</option>
+                        <option value="hod-Visual Arts">HOD — Visual Arts</option>
+                        <option value="hod-Home Economics">HOD — Home Economics</option>
+                        <option value="hod-Agriculture">HOD — Agriculture</option>
+                        <option value="hod-Technical / Vocational">HOD — Technical / Vocational</option>
+                        <option value="hod-Languages">HOD — Languages</option>
+                        <option value="hod-Core / General Subjects">HOD — Core / General Subjects</option>
+                        <option value="hod-Guidance & Counselling">HOD — Guidance &amp; Counselling</option>
+                    </optgroup>
+                    <optgroup label="── SHS Form 1 ──">
+                        <option value="1-General Science">Form 1 - General Science</option>
+                        <option value="1-Visual Arts">Form 1 - Visual Arts</option>
+                        <option value="1-General Arts 1">Form 1 - General Arts 1</option>
+                        <option value="1-General Arts 2">Form 1 - General Arts 2</option>
+                        <option value="1-General Arts 3">Form 1 - General Arts 3</option>
+                        <option value="1-General Arts 4">Form 1 - General Arts 4</option>
+                        <option value="1-General Arts 5">Form 1 - General Arts 5</option>
+                        <option value="1-Home Economics">Form 1 - Home Economics</option>
+                        <option value="1-Home Economics 1">Form 1 - Home Economics 1</option>
+                        <option value="1-Home Economics 2">Form 1 - Home Economics 2</option>
+                        <option value="1-Business">Form 1 - Business</option>
+                        <option value="1-Agriculture">Form 1 - Agriculture</option>
+                    </optgroup>
+                    <optgroup label="── SHS Form 2 ──">
+                        <option value="2-General Science">Form 2 - General Science</option>
+                        <option value="2-Visual Arts">Form 2 - Visual Arts</option>
+                        <option value="2-General Arts 1">Form 2 - General Arts 1</option>
+                        <option value="2-General Arts 2">Form 2 - General Arts 2</option>
+                        <option value="2-General Arts 3">Form 2 - General Arts 3</option>
+                        <option value="2-General Arts 4">Form 2 - General Arts 4</option>
+                        <option value="2-General Arts 5">Form 2 - General Arts 5</option>
+                        <option value="2-Home Economics">Form 2 - Home Economics</option>
+                        <option value="2-Home Economics 1">Form 2 - Home Economics 1</option>
+                        <option value="2-Home Economics 2">Form 2 - Home Economics 2</option>
+                        <option value="2-Business">Form 2 - Business</option>
+                        <option value="2-Agriculture">Form 2 - Agriculture</option>
+                    </optgroup>
+                    <optgroup label="── SHS Form 3 ──">
+                        <option value="3-General Science">Form 3 - General Science</option>
+                        <option value="3-Visual Arts">Form 3 - Visual Arts</option>
+                        <option value="3-General Arts 1">Form 3 - General Arts 1</option>
+                        <option value="3-General Arts 2">Form 3 - General Arts 2</option>
+                        <option value="3-General Arts 3">Form 3 - General Arts 3</option>
+                        <option value="3-General Arts 4">Form 3 - General Arts 4</option>
+                        <option value="3-General Arts 5">Form 3 - General Arts 5</option>
+                        <option value="3-Home Economics">Form 3 - Home Economics</option>
+                        <option value="3-Home Economics 1">Form 3 - Home Economics 1</option>
+                        <option value="3-Home Economics 2">Form 3 - Home Economics 2</option>
+                        <option value="3-Business">Form 3 - Business</option>
+                        <option value="3-Agriculture">Form 3 - Agriculture</option>
+                    </optgroup>
                 </select>
                 <small class="helper-text" style="display: block; margin-top: 5px;">
-                    Select the class you are responsible for as Form Master/Class Teacher
+                    Select the class you are responsible for as Form Master/Class Teacher, a house if you are a House Master/Mistress, your department if you are an HOD, or Senior Housemaster/Mistress if applicable
                 </small>
             </div>
         </div>
@@ -3766,6 +3792,330 @@ body[data-theme="dark"] .marks-table tr:nth-child(odd) {
     </div>
 </div>
 
+
+<!-- ══════════════════════════════════════════════════════
+     TEACHER ATTENDANCE TAB
+     ══════════════════════════════════════════════════════ -->
+<div id="teacherAttendance" class="tab-content">
+    <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="btnTAClassTab"
+                onclick="switchTeacherAttTab('classAtt')" style="flex:1;">🏫 Class Attendance</button>
+        <button class="btn btn-secondary" id="btnTAPresenceTab"
+                onclick="switchTeacherAttTab('presenceAtt')" style="flex:1;">🏢 School Presence</button>
+        <button class="btn btn-secondary" id="btnTAInvigTab"
+                onclick="switchTeacherAttTab('invigAtt')" style="flex:1;">📋 Invigilator Tracking</button>
+        <button class="btn btn-secondary" id="btnTAReportTab"
+                onclick="switchTeacherAttTab('reportAtt')" style="flex:1;">📊 Reports & Export</button>
+        <button class="btn btn-danger" onclick="closePageToWelcome()" style="flex:0;">✖ Close</button>
+    </div>
+
+    <!-- CLASS ATTENDANCE -->
+    <div id="classAtt">
+        <div class="card">
+            <div class="card-header">
+                <span>🏫 Teacher Class Attendance</span>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="saveTeacherClassAtt()">💾 Save</button>
+                    <button class="btn btn-primary" onclick="downloadTeacherClassAttCSV()">📥 CSV</button>
+                    <button class="btn btn-secondary" onclick="clearTeacherClassAttForm()">🔄 Clear</button>
+                </div>
+            </div>
+            <div class="alert alert-info">Record which teachers attended or missed their assigned classes each day.</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="tcaDate" onchange="loadTeacherClassAttGrid()">
+                </div>
+                <div class="form-group">
+                    <label>Period / Time Slot</label>
+                    <select id="tcaPeriod" onchange="loadTeacherClassAttGrid()">
+                        <option value="">-- All Periods --</option>
+                        <option>Period 1</option><option>Period 2</option>
+                        <option>Period 3</option><option>Period 4</option>
+                        <option>Period 5</option><option>Period 6</option>
+                        <option>Period 7</option><option>Period 8</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display:flex;align-items:flex-end;">
+                    <button class="btn btn-warning" onclick="loadTeacherClassAttGrid()" style="width:100%;">🔄 Load Teachers</button>
+                </div>
+            </div>
+            <div id="tcaGrid"><div class="alert alert-info">Select a date to load teachers.</div></div>
+        </div>
+    </div>
+
+    <!-- SCHOOL PRESENCE -->
+    <div id="presenceAtt" style="display:none;">
+        <div class="card">
+            <div class="card-header">
+                <span>🏢 Teacher School Presence (Sign In / Out)</span>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="saveTeacherPresence()">💾 Save</button>
+                    <button class="btn btn-primary" onclick="downloadTeacherPresenceCSV()">📥 CSV</button>
+                    <button class="btn btn-secondary" onclick="clearTeacherPresenceForm()">🔄 Clear</button>
+                </div>
+            </div>
+            <div class="alert alert-info">Record daily presence — whether each teacher signed in and out of school.</div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Date *</label>
+                    <input type="date" id="tpDate" onchange="loadTeacherPresenceGrid()">
+                </div>
+                <div class="form-group" style="display:flex;align-items:flex-end;">
+                    <button class="btn btn-warning" onclick="loadTeacherPresenceGrid()" style="width:100%;">🔄 Load Teachers</button>
+                </div>
+            </div>
+            <div id="tpGrid"><div class="alert alert-info">Select a date to load teachers.</div></div>
+        </div>
+    </div>
+
+    <!-- INVIGILATOR TRACKING -->
+    <div id="invigAtt" style="display:none;">
+        <div class="card">
+            <div class="card-header">
+                <span>📋 Invigilator Assignment & Attendance</span>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="showAddInvigForm()">➕ Add Assignment</button>
+                    <button class="btn btn-success" onclick="downloadInvigCSV()">📥 CSV</button>
+                </div>
+            </div>
+            <div class="alert alert-info">Assign teachers to invigilate exams/tests, then mark whether they attended.</div>
+            <div id="addInvigForm" style="display:none;background:rgba(255,255,255,0.08);padding:16px;border-radius:8px;margin-bottom:16px;">
+                <input type="hidden" id="invigEditId" value="">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Subject *</label>
+                        <select id="invigSubject">
+                            <option value="">-- Select Subject --</option>
+                            <option value="All Subjects">All Subjects (general exam day)</option>
+                            <optgroup label="── KG / Lower Primary (KG1–B3) ──">
+                                <option value="Literacy (KG)">Literacy (KG)</option>
+                                <option value="Numeracy (KG)">Numeracy (KG)</option>
+                                <option value="Our World Our People (KG)">Our World Our People (KG)</option>
+                                <option value="Creative Arts (KG)">Creative Arts (KG)</option>
+                                <option value="Physical Development & Health (KG)">Physical Development &amp; Health (KG)</option>
+                                <option value="Religious & Moral Education (KG)">Religious &amp; Moral Education (KG)</option>
+                                <option value="Ghanaian Language (KG)">Ghanaian Language (KG)</option>
+                            </optgroup>
+                            <optgroup label="── Upper Primary (B4–B6) ──">
+                                <option value="English Language (Primary)">English Language (Primary)</option>
+                                <option value="Mathematics (Primary)">Mathematics (Primary)</option>
+                                <option value="Integrated Science (Primary)">Integrated Science (Primary)</option>
+                                <option value="Our World Our People (Primary)">Our World Our People (Primary)</option>
+                                <option value="Creative Arts (Primary)">Creative Arts (Primary)</option>
+                                <option value="Physical Education & Health (Primary)">Physical Education &amp; Health (Primary)</option>
+                                <option value="Religious & Moral Education (Primary)">Religious &amp; Moral Education (Primary)</option>
+                                <option value="Ghanaian Language (Primary)">Ghanaian Language (Primary)</option>
+                                <option value="French (Primary)">French (Primary)</option>
+                                <option value="ICT (Primary)">ICT (Primary)</option>
+                            </optgroup>
+                            <optgroup label="── JHS (B7–B9 / JHS 1–3) ──">
+                                <option value="English Language (JHS)">English Language (JHS)</option>
+                                <option value="Mathematics (JHS)">Mathematics (JHS)</option>
+                                <option value="Integrated Science (JHS)">Integrated Science (JHS)</option>
+                                <option value="Social Studies (JHS)">Social Studies (JHS)</option>
+                                <option value="Religious & Moral Education (JHS)">Religious &amp; Moral Education (JHS)</option>
+                                <option value="Creative Arts (JHS)">Creative Arts (JHS)</option>
+                                <option value="Physical Education & Health (JHS)">Physical Education &amp; Health (JHS)</option>
+                                <option value="Ghanaian Language (JHS)">Ghanaian Language (JHS)</option>
+                                <option value="French (JHS)">French (JHS)</option>
+                                <option value="ICT (JHS)">ICT (JHS)</option>
+                                <option value="Career Technology (JHS)">Career Technology (JHS)</option>
+                            </optgroup>
+                            <optgroup label="── SHS Core (All Programmes) ──">
+                                <option value="English Language">English Language</option>
+                                <option value="Mathematics (Core)">Mathematics (Core)</option>
+                                <option value="General Science">General Science</option>
+                                <option value="Integrated Science">Integrated Science</option>
+                                <option value="Social Studies">Social Studies</option>
+                                <option value="Physical Education & Health">Physical Education &amp; Health</option>
+                                <option value="Religious & Moral Education">Religious &amp; Moral Education</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Sciences ──">
+                                <option value="Biology">Biology</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Further Mathematics">Further Mathematics</option>
+                                <option value="Elective Mathematics">Elective Mathematics</option>
+                                <option value="Human Biology">Human Biology</option>
+                                <option value="Earth Science">Earth Science</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — General Arts ──">
+                                <option value="Economics">Economics</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Government">Government</option>
+                                <option value="History">History</option>
+                                <option value="Literature in English">Literature in English</option>
+                                <option value="French">French</option>
+                                <option value="Twi">Twi</option>
+                                <option value="Ga">Ga</option>
+                                <option value="Ewe">Ewe</option>
+                                <option value="Dagbani">Dagbani</option>
+                                <option value="Religious Studies">Religious Studies</option>
+                                <option value="Christian Religious Studies">Christian Religious Studies</option>
+                                <option value="Islamic Religious Studies">Islamic Religious Studies</option>
+                                <option value="Music">Music</option>
+                                <option value="Ghanaian Language">Ghanaian Language</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Business ──">
+                                <option value="Financial Accounting">Financial Accounting</option>
+                                <option value="Business Management">Business Management</option>
+                                <option value="Cost Accounting">Cost Accounting</option>
+                                <option value="Accounting">Accounting</option>
+                                <option value="Economics (Business)">Economics (Business)</option>
+                                <option value="Typewriting / Keyboarding">Typewriting / Keyboarding</option>
+                                <option value="Office Administration">Office Administration</option>
+                                <option value="Salesmanship">Salesmanship</option>
+                                <option value="Store & Supply Chain Management">Store &amp; Supply Chain Management</option>
+                                <option value="Insurance">Insurance</option>
+                                <option value="ICT">ICT</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Visual Arts ──">
+                                <option value="General Knowledge in Art">General Knowledge in Art</option>
+                                <option value="Art & Design Foundation">Art &amp; Design Foundation</option>
+                                <option value="Art & Design Studio">Art &amp; Design Studio</option>
+                                <option value="Graphic Design">Graphic Design</option>
+                                <option value="Picture Making">Picture Making</option>
+                                <option value="Sculpture">Sculpture</option>
+                                <option value="Ceramics">Ceramics</option>
+                                <option value="Textiles">Textiles</option>
+                                <option value="Leatherwork">Leatherwork</option>
+                                <option value="Jewellery">Jewellery</option>
+                                <option value="Basketry">Basketry</option>
+                                <option value="Performing Art">Performing Art</option>
+                                <option value="Communication & Design Technology">Communication &amp; Design Technology</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Home Economics ──">
+                                <option value="Foods & Nutrition">Foods &amp; Nutrition</option>
+                                <option value="Clothing & Textiles">Clothing &amp; Textiles</option>
+                                <option value="Management In Living">Management In Living</option>
+                                <option value="Housing & Interior Design">Housing &amp; Interior Design</option>
+                                <option value="Child Development">Child Development</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Agriculture ──">
+                                <option value="Agricultural Science">Agricultural Science</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Animal Husbandry">Animal Husbandry</option>
+                                <option value="Crop Husbandry">Crop Husbandry</option>
+                                <option value="Fisheries">Fisheries</option>
+                                <option value="Forestry">Forestry</option>
+                                <option value="Agricultural Economics">Agricultural Economics</option>
+                                <option value="Agricultural Mechanisation">Agricultural Mechanisation</option>
+                            </optgroup>
+                            <optgroup label="── SHS Elective — Technical / Vocational ──">
+                                <option value="Building Construction Technology">Building Construction Technology</option>
+                                <option value="Auto Mechanics">Auto Mechanics</option>
+                                <option value="Electrical Installation & Maintenance">Electrical Installation &amp; Maintenance</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Welding & Fabrication Technology">Welding &amp; Fabrication Technology</option>
+                                <option value="Plumbing & Gas Fitting">Plumbing &amp; Gas Fitting</option>
+                                <option value="Carpentry & Joinery">Carpentry &amp; Joinery</option>
+                                <option value="Masonry">Masonry</option>
+                                <option value="Technical Drawing">Technical Drawing</option>
+                                <option value="Wood Work Technology">Wood Work Technology</option>
+                                <option value="Metal Work Technology">Metal Work Technology</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type of Test / Exam *</label>
+                        <select id="invigTestType">
+                            <option value="">-- Select Type --</option>
+                            <option value="Class Test">Class Test</option>
+                            <option value="Mid-Semester Exam">Mid-Semester Exam</option>
+                            <option value="End-of-Semester Exam">End-of-Semester Exam</option>
+                            <option value="Mock Exam">Mock Exam</option>
+                            <option value="WASSCE / WAEC">WASSCE / WAEC</option>
+                            <option value="BECE">BECE</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Details</label>
+                        <input type="text" id="invigExamName" placeholder="e.g. Form 1 only, Paper 2, etc. (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label>Date *</label>
+                        <input type="date" id="invigDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Venue / Room</label>
+                        <input type="text" id="invigVenue" placeholder="e.g. Hall A, Room 5">
+                    </div>
+                    <div class="form-group">
+                        <label>Session</label>
+                        <select id="invigSession">
+                            <option>Morning</option>
+                            <option>Afternoon</option>
+                            <option>Full Day</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Assigned Teacher *</label>
+                        <select id="invigTeacher">
+                            <option value="">-- Select Teacher --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select id="invigRole">
+                            <option>Chief Invigilator</option>
+                            <option>Invigilator</option>
+                            <option>Assistant Invigilator</option>
+                            <option>Relief Invigilator</option>
+                            <option>Supervisor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success" id="invigSaveBtn" onclick="saveInvigAssignment()">💾 Save Assignment</button>
+                    <button class="btn btn-secondary" onclick="hideAddInvigForm()">✖ Cancel</button>
+                </div>
+            </div>
+            <div id="invigList"><div class="alert alert-info">No assignments yet. Click ➕ Add Assignment to begin.</div></div>
+        </div>
+    </div>
+
+    <!-- REPORTS -->
+    <div id="reportAtt" style="display:none;">
+        <div class="card">
+            <div class="card-header">
+                <span>📊 Teacher Attendance Reports</span>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="printTeacherAttReport()">🖨️ Print</button>
+                    <button class="btn btn-success" onclick="downloadTeacherAttReportCSV()">📥 Export CSV</button>
+                    <button class="btn btn-secondary" onclick="clearTeacherAttReportFilters()">🔄 Clear</button>
+                </div>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Report Type</label>
+                    <select id="taReportType" onchange="generateTeacherAttReport()">
+                        <option value="summary">Summary per Teacher</option>
+                        <option value="daily">Daily View</option>
+                        <option value="invig">Invigilator Duties</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date From</label>
+                    <input type="date" id="taReportFrom" onchange="generateTeacherAttReport()">
+                </div>
+                <div class="form-group">
+                    <label>Date To</label>
+                    <input type="date" id="taReportTo" onchange="generateTeacherAttReport()">
+                </div>
+                <div class="form-group">
+                    <label>Filter Teacher</label>
+                    <select id="taReportTeacher" onchange="generateTeacherAttReport()">
+                        <option value="">All Teachers</option>
+                    </select>
+                </div>
+            </div>
+            <div id="taReportSection"><div class="alert alert-info">Select a report type and date range to generate.</div></div>
+        </div>
+    </div>
+</div>
+
     <!-- ═══════════════════════════════════════════════════════════════
          FIREBASE SDK  (v9 compat build — no bundler needed)
          Replace the config object below with YOUR Firebase project config
@@ -3805,6 +4155,10 @@ firebase.initializeApp(firebaseConfig);
     const COL_SETTINGS         = 'settings';
     const COL_MESSAGES         = 'messages';
     const COL_TEACHER_SESSIONS = 'teacherSessions'; // daily access tracking
+    const COL_TEACHER_ATT      = 'teacherAttendanceData'; // teacher class/presence/invigilator records
+    const TA_DOC_CLASS_ATT     = 'classAttendance';
+    const TA_DOC_PRESENCE      = 'presence';
+    const TA_DOC_INVIGILATORS  = 'invigilators';
 
     // ── Storage path helpers ──────────────────────────────────────
     const storagePath = {
@@ -4033,6 +4387,27 @@ firebase.initializeApp(firebaseConfig);
             // Restore session
             currentUser  = JSON.parse(window.localStorage.getItem('currentUser') || 'null');
             currentTheme = window.localStorage.getItem('theme') || 'light';
+
+            // ── Sync teacher attendance / invigilator data from Firestore ──
+            try {
+                const [_taClass, _taPresence, _taInvig] = await Promise.all([
+                    fbGet(COL_TEACHER_ATT, TA_DOC_CLASS_ATT),
+                    fbGet(COL_TEACHER_ATT, TA_DOC_PRESENCE),
+                    fbGet(COL_TEACHER_ATT, TA_DOC_INVIGILATORS)
+                ]);
+                if (_taClass && _taClass.data)    teacherClassAttRecords = _taClass.data;
+                if (_taPresence && _taPresence.data) teacherPresenceRecords = _taPresence.data;
+                if (_taInvig && _taInvig.list)     invigAssignments = _taInvig.list;
+
+                window.localStorage.setItem('teacherClassAttRecords', JSON.stringify(teacherClassAttRecords));
+                window.localStorage.setItem('_cachedTeacherClassAtt', JSON.stringify(teacherClassAttRecords));
+                window.localStorage.setItem('teacherPresenceRecords', JSON.stringify(teacherPresenceRecords));
+                window.localStorage.setItem('_cachedTeacherPresence', JSON.stringify(teacherPresenceRecords));
+                window.localStorage.setItem('invigAssignments', JSON.stringify(invigAssignments));
+                window.localStorage.setItem('_cachedInvigAssignments', JSON.stringify(invigAssignments));
+            } catch (taErr) {
+                console.warn('Teacher attendance sync failed, using local cache:', taErr);
+            }
 
             appReady = true;
         } catch (err) {
@@ -5180,6 +5555,7 @@ function displayOverallFormRanking(formNumber, container) {
         document.getElementById('tabTeacherRankings').style.display = 'inline-block';
         document.getElementById('tabMessages').style.display = 'inline-block';
         document.getElementById('tabAttendance').style.display = 'inline-block';
+        document.getElementById('tabTeacherAttendance').style.display = 'inline-block';
 
         // Show landing screen — admin opens a tab from the hamburger
         showLandingScreen('Administrator');
@@ -5345,6 +5721,10 @@ function switchTab(tabName) {
 
     if (tabName === 'attendance') {
         loadAttendanceSubjects();
+    }
+
+    if (tabName === 'teacherAttendance') {
+        initTeacherAttendanceTab();
     }
 }
         function displayTeacherList() {
@@ -12047,6 +12427,16 @@ function printTeacherList() {
 let attendanceRecords = JSON.parse(localStorage.getItem('attendanceRecords') || '{}');
 // Structure: attendanceRecords[subject][date+type] = { sessionType, date, records: {studentId: 'Present'|'Absent'|'Excused'} }
 
+// ========================================
+// TEACHER ATTENDANCE & INVIGILATOR TRACKING — data
+// ========================================
+let teacherClassAttRecords = JSON.parse(localStorage.getItem('teacherClassAttRecords') ||
+                               localStorage.getItem('_cachedTeacherClassAtt') || '{}');
+let teacherPresenceRecords = JSON.parse(localStorage.getItem('teacherPresenceRecords') ||
+                               localStorage.getItem('_cachedTeacherPresence') || '{}');
+let invigAssignments       = JSON.parse(localStorage.getItem('invigAssignments') ||
+                               localStorage.getItem('_cachedInvigAssignments') || '[]');
+
 function loadAttendanceSubjects() {
     const sel  = document.getElementById('attendanceSubject');
     const sel2 = document.getElementById('attendanceSummarySubject');
@@ -12303,6 +12693,567 @@ function downloadAttendanceCSV() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
+
+// TEACHER ATTENDANCE & INVIGILATOR TRACKING FUNCTIONS
+// ══════════════════════════════════════════════════════════════════
+
+function switchTeacherAttTab(tab) {
+    ['classAtt','presenceAtt','invigAtt','reportAtt'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = id === tab ? 'block' : 'none';
+    });
+    ['btnTAClassTab','btnTAPresenceTab','btnTAInvigTab','btnTAReportTab'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = 'btn btn-secondary';
+    });
+    const map = {classAtt:'btnTAClassTab',presenceAtt:'btnTAPresenceTab',
+                 invigAtt:'btnTAInvigTab',reportAtt:'btnTAReportTab'};
+    if (map[tab]) document.getElementById(map[tab]).className = 'btn btn-primary';
+    if (tab === 'invigAtt')  renderInvigList();
+    if (tab === 'reportAtt') { populateReportTeacherDropdown(); generateTeacherAttReport(); }
+}
+
+function initTeacherAttendanceTab() {
+    const today = new Date().toISOString().split('T')[0];
+    ['tcaDate','tpDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && !el.value) el.value = today;
+    });
+    const sel = document.getElementById('invigTeacher');
+    if (sel) {
+        sel.innerHTML = '<option value="">-- Select Teacher --</option>' +
+            teachers.map(t => `<option value="${t.id}">${t.name} (${t.initials})</option>`).join('');
+    }
+    switchTeacherAttTab('classAtt');
+    loadTeacherClassAttGrid();
+}
+
+// ── CLASS ATTENDANCE ──────────────────────────────────────────────
+function loadTeacherClassAttGrid() {
+    const date   = document.getElementById('tcaDate').value;
+    const period = document.getElementById('tcaPeriod').value;
+    const grid   = document.getElementById('tcaGrid');
+    if (!date) { grid.innerHTML = '<div class="alert alert-info">Select a date to load teachers.</div>'; return; }
+    const key   = date + '_' + (period || 'ALL');
+    const saved = teacherClassAttRecords[key] || {};
+    if (teachers.length === 0) {
+        grid.innerHTML = '<div class="alert alert-warning">No teachers found. Please add teachers first.</div>'; return;
+    }
+    let h = `<table style="width:100%;border-collapse:collapse;margin-top:10px;">
+        <thead><tr style="background:rgba(255,255,255,0.15);">
+            <th style="padding:10px;text-align:left;">Teacher</th>
+            <th style="padding:10px;text-align:left;">Initials</th>
+            <th style="padding:10px;text-align:center;">Status</th>
+            <th style="padding:10px;text-align:left;">Note / Reason</th>
+        </tr></thead><tbody>`;
+    teachers.forEach(t => {
+        const rec = saved[t.id] || {};
+        const opts = ['Present','Absent','Late','Excused'].map(s =>
+            `<option value="${s}" ${rec.status===s?'selected':''}>${s}</option>`).join('');
+        h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;"><strong>${t.name}</strong></td>
+            <td style="padding:8px;">${t.initials}</td>
+            <td style="padding:8px;text-align:center;">
+                <select id="tca_${t.id}_status" style="padding:4px 8px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);">
+                    <option value="">-- Select --</option>${opts}
+                </select></td>
+            <td style="padding:8px;">
+                <input type="text" id="tca_${t.id}_note" value="${rec.note||''}"
+                       placeholder="Optional note..."
+                       style="width:100%;padding:4px 8px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);">
+            </td></tr>`;
+    });
+    grid.innerHTML = h + '</tbody></table>';
+}
+
+function saveTeacherClassAtt() {
+    const date   = document.getElementById('tcaDate').value;
+    const period = document.getElementById('tcaPeriod').value;
+    if (!date) { alert('Please select a date first.'); return; }
+    const key = date + '_' + (period || 'ALL');
+    if (!teacherClassAttRecords[key]) teacherClassAttRecords[key] = {};
+    teachers.forEach(t => {
+        const statusEl = document.getElementById(`tca_${t.id}_status`);
+        const noteEl   = document.getElementById(`tca_${t.id}_note`);
+        if (statusEl && statusEl.value) {
+            teacherClassAttRecords[key][t.id] = {
+                status: statusEl.value, note: noteEl ? noteEl.value : '',
+                name: t.name, initials: t.initials
+            };
+        }
+    });
+    localStorage.setItem('teacherClassAttRecords', JSON.stringify(teacherClassAttRecords));
+    localStorage.setItem('_cachedTeacherClassAtt', JSON.stringify(teacherClassAttRecords));
+    fbSave(COL_TEACHER_ATT, TA_DOC_CLASS_ATT, { data: teacherClassAttRecords })
+        .catch(e => console.warn('Firestore class attendance sync:', e));
+    alert('✅ Class attendance saved successfully!');
+}
+
+function downloadTeacherClassAttCSV() {
+    let csv = 'Date,Period,Teacher,Initials,Status,Note\n';
+    Object.keys(teacherClassAttRecords).sort().forEach(key => {
+        const parts = key.split('_'); const date = parts[0]; const period = parts.slice(1).join('_');
+        Object.values(teacherClassAttRecords[key]).forEach(r => {
+            csv += `"${date}","${period}","${r.name}","${r.initials}","${r.status}","${r.note||''}"\n`;
+        });
+    });
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='teacher_class_attendance.csv'; a.click(); URL.revokeObjectURL(url);
+}
+
+function clearTeacherClassAttForm() {
+    document.getElementById('tcaDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('tcaPeriod').value = '';
+    document.getElementById('tcaGrid').innerHTML = '<div class="alert alert-info">Select a date to load teachers.</div>';
+}
+
+// ── SCHOOL PRESENCE ───────────────────────────────────────────────
+function loadTeacherPresenceGrid() {
+    const date = document.getElementById('tpDate').value;
+    const grid = document.getElementById('tpGrid');
+    if (!date) { grid.innerHTML = '<div class="alert alert-info">Select a date to load teachers.</div>'; return; }
+    const saved = teacherPresenceRecords[date] || {};
+    if (teachers.length === 0) {
+        grid.innerHTML = '<div class="alert alert-warning">No teachers found.</div>'; return;
+    }
+    let h = `<table style="width:100%;border-collapse:collapse;margin-top:10px;">
+        <thead><tr style="background:rgba(255,255,255,0.15);">
+            <th style="padding:10px;">Teacher</th>
+            <th style="padding:10px;text-align:center;">Status</th>
+            <th style="padding:10px;text-align:center;">Sign In</th>
+            <th style="padding:10px;text-align:center;">Sign Out</th>
+            <th style="padding:10px;">Remark</th>
+        </tr></thead><tbody>`;
+    teachers.forEach(t => {
+        const rec = saved[t.id] || {};
+        const opts = ['Present','Absent','Late','On Leave','Official Duty'].map(s =>
+            `<option value="${s}" ${rec.status===s?'selected':''}>${s}</option>`).join('');
+        h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;"><strong>${t.name}</strong><br><small style="opacity:0.7;">${t.initials}</small></td>
+            <td style="padding:8px;text-align:center;">
+                <select id="tp_${t.id}_status" style="padding:4px 8px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);">
+                    <option value="">-- Select --</option>${opts}</select></td>
+            <td style="padding:8px;text-align:center;">
+                <input type="time" id="tp_${t.id}_in" value="${rec.signIn||''}"
+                       style="padding:4px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);"></td>
+            <td style="padding:8px;text-align:center;">
+                <input type="time" id="tp_${t.id}_out" value="${rec.signOut||''}"
+                       style="padding:4px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);"></td>
+            <td style="padding:8px;">
+                <input type="text" id="tp_${t.id}_remark" value="${rec.remark||''}"
+                       placeholder="Optional..."
+                       style="width:100%;padding:4px 8px;border-radius:4px;background:#2d2d4e;color:#fff;border:1px solid rgba(255,255,255,0.2);"></td>
+        </tr>`;
+    });
+    grid.innerHTML = h + '</tbody></table>';
+}
+
+function saveTeacherPresence() {
+    const date = document.getElementById('tpDate').value;
+    if (!date) { alert('Please select a date first.'); return; }
+    if (!teacherPresenceRecords[date]) teacherPresenceRecords[date] = {};
+    teachers.forEach(t => {
+        const statusEl = document.getElementById(`tp_${t.id}_status`);
+        if (statusEl && statusEl.value) {
+            teacherPresenceRecords[date][t.id] = {
+                status:  statusEl.value,
+                signIn:  document.getElementById(`tp_${t.id}_in`)?.value  || '',
+                signOut: document.getElementById(`tp_${t.id}_out`)?.value || '',
+                remark:  document.getElementById(`tp_${t.id}_remark`)?.value || '',
+                name: t.name, initials: t.initials
+            };
+        }
+    });
+    localStorage.setItem('teacherPresenceRecords', JSON.stringify(teacherPresenceRecords));
+    localStorage.setItem('_cachedTeacherPresence', JSON.stringify(teacherPresenceRecords));
+    fbSave(COL_TEACHER_ATT, TA_DOC_PRESENCE, { data: teacherPresenceRecords })
+        .catch(e => console.warn('Firestore presence sync:', e));
+    alert('✅ School presence saved successfully!');
+}
+
+function downloadTeacherPresenceCSV() {
+    let csv = 'Date,Teacher,Initials,Status,Sign In,Sign Out,Remark\n';
+    Object.keys(teacherPresenceRecords).sort().forEach(date => {
+        Object.values(teacherPresenceRecords[date]).forEach(r => {
+            csv += `"${date}","${r.name}","${r.initials}","${r.status}","${r.signIn||''}","${r.signOut||''}","${r.remark||''}"\n`;
+        });
+    });
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='teacher_presence.csv'; a.click(); URL.revokeObjectURL(url);
+}
+
+function clearTeacherPresenceForm() {
+    document.getElementById('tpDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('tpGrid').innerHTML = '<div class="alert alert-info">Select a date to load teachers.</div>';
+}
+
+// ── INVIGILATOR TRACKING ──────────────────────────────────────────
+function showAddInvigForm() {
+    document.getElementById('invigEditId').value = '';
+    document.getElementById('invigSaveBtn').textContent = '💾 Save Assignment';
+    ['invigSubject','invigTestType','invigExamName','invigVenue'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+    });
+    const today = new Date().toISOString().split('T')[0];
+    const df = document.getElementById('invigDate');
+    if (df) df.value = today;
+    const sel = document.getElementById('invigTeacher');
+    if (sel) {
+        sel.innerHTML = '<option value="">-- Select Teacher --</option>' +
+            teachers.map(t => `<option value="${t.id}">${t.name} (${t.initials})</option>`).join('');
+    }
+    document.getElementById('addInvigForm').style.display = 'block';
+}
+
+function hideAddInvigForm() {
+    document.getElementById('addInvigForm').style.display = 'none';
+    document.getElementById('invigEditId').value = '';
+    document.getElementById('invigSaveBtn').textContent = '💾 Save Assignment';
+}
+
+function editInvigAssignment(id) {
+    const inv = invigAssignments.find(i => String(i.id) === String(id));
+    if (!inv) return;
+
+    const sel = document.getElementById('invigTeacher');
+    if (sel) {
+        sel.innerHTML = '<option value="">-- Select Teacher --</option>' +
+            teachers.map(t => `<option value="${t.id}">${t.name} (${t.initials})</option>`).join('');
+    }
+
+    document.getElementById('invigEditId').value    = inv.id;
+    document.getElementById('invigSubject').value   = inv.subject || '';
+    document.getElementById('invigTestType').value  = inv.testType || '';
+    document.getElementById('invigExamName').value  = inv.examDetails || '';
+    document.getElementById('invigDate').value      = inv.date || '';
+    document.getElementById('invigVenue').value     = inv.venue || '';
+    document.getElementById('invigSession').value   = inv.session || 'Morning';
+    document.getElementById('invigTeacher').value   = inv.teacherId || '';
+    document.getElementById('invigRole').value      = inv.role || 'Invigilator';
+
+    document.getElementById('invigSaveBtn').textContent = '💾 Update Assignment';
+    document.getElementById('addInvigForm').style.display = 'block';
+    document.getElementById('addInvigForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function saveInvigAssignment() {
+    const editId    = document.getElementById('invigEditId').value;
+    const subject   = document.getElementById('invigSubject').value;
+    const testType  = document.getElementById('invigTestType').value;
+    const examDetails = document.getElementById('invigExamName').value.trim();
+    const date      = document.getElementById('invigDate').value;
+    const venue     = document.getElementById('invigVenue').value.trim();
+    const session   = document.getElementById('invigSession').value;
+    const teacherId = document.getElementById('invigTeacher').value;
+    const role      = document.getElementById('invigRole').value;
+    if (!subject || !testType || !date || !teacherId) {
+        alert('Please fill in Subject, Type of Test, Date and Teacher.'); return;
+    }
+    const teacher = teachers.find(t => String(t.id) === String(teacherId));
+    const examName = examDetails ? `${testType} — ${subject} (${examDetails})` : `${testType} — ${subject}`;
+
+    if (editId) {
+        const idx = invigAssignments.findIndex(i => String(i.id) === String(editId));
+        if (idx !== -1) {
+            invigAssignments[idx] = {
+                ...invigAssignments[idx],
+                subject, testType, examDetails, examName, date, venue, session,
+                teacherId, teacherName: teacher ? teacher.name : '',
+                teacherInitials: teacher ? teacher.initials : '',
+                role
+            };
+        }
+        alert('✅ Invigilator assignment updated!');
+    } else {
+        invigAssignments.push({
+            id: Date.now() + '_inv', subject, testType, examDetails, examName, date, venue, session,
+            teacherId, teacherName: teacher ? teacher.name : '',
+            teacherInitials: teacher ? teacher.initials : '',
+            role, attended: null, note: ''
+        });
+        alert('✅ Invigilator assignment saved!');
+    }
+
+    localStorage.setItem('invigAssignments', JSON.stringify(invigAssignments));
+    localStorage.setItem('_cachedInvigAssignments', JSON.stringify(invigAssignments));
+    fbSave(COL_TEACHER_ATT, TA_DOC_INVIGILATORS, { list: invigAssignments })
+        .catch(e => console.warn('Firestore invigilator sync:', e));
+    hideAddInvigForm();
+    renderInvigList();
+}
+
+function markInvigAttendance(id, attended) {
+    const inv = invigAssignments.find(i => i.id === id);
+    if (!inv) return;
+    inv.attended = attended;
+    localStorage.setItem('invigAssignments', JSON.stringify(invigAssignments));
+    localStorage.setItem('_cachedInvigAssignments', JSON.stringify(invigAssignments));
+    fbSave(COL_TEACHER_ATT, TA_DOC_INVIGILATORS, { list: invigAssignments })
+        .catch(e => console.warn('Firestore invigilator sync:', e));
+    renderInvigList();
+}
+
+function resetInvigAttendance(id) {
+    const inv = invigAssignments.find(i => String(i.id) === String(id));
+    if (!inv) return;
+    inv.attended = null;
+    localStorage.setItem('invigAssignments', JSON.stringify(invigAssignments));
+    localStorage.setItem('_cachedInvigAssignments', JSON.stringify(invigAssignments));
+    fbSave(COL_TEACHER_ATT, TA_DOC_INVIGILATORS, { list: invigAssignments })
+        .catch(e => console.warn('Firestore invigilator sync:', e));
+    renderInvigList();
+}
+
+function deleteInvigAssignment(id) {
+    if (!confirm('Delete this invigilator assignment?')) return;
+    invigAssignments = invigAssignments.filter(i => i.id !== id);
+    localStorage.setItem('invigAssignments', JSON.stringify(invigAssignments));
+    localStorage.setItem('_cachedInvigAssignments', JSON.stringify(invigAssignments));
+    fbSave(COL_TEACHER_ATT, TA_DOC_INVIGILATORS, { list: invigAssignments })
+        .catch(e => console.warn('Firestore invigilator sync:', e));
+    renderInvigList();
+}
+
+function renderInvigList() {
+    const el = document.getElementById('invigList');
+    if (!el) return;
+    if (invigAssignments.length === 0) {
+        el.innerHTML = '<div class="alert alert-info">No assignments yet. Click ➕ Add Assignment to begin.</div>'; return;
+    }
+    const sorted = [...invigAssignments].sort((a,b) => b.date.localeCompare(a.date));
+    let h = `<table style="width:100%;border-collapse:collapse;margin-top:10px;">
+        <thead><tr style="background:rgba(255,255,255,0.15);">
+            <th style="padding:10px;">Date</th><th style="padding:10px;">Subject</th>
+            <th style="padding:10px;">Type</th>
+            <th style="padding:10px;">Teacher</th><th style="padding:10px;">Role</th>
+            <th style="padding:10px;">Venue</th><th style="padding:10px;">Session</th>
+            <th style="padding:10px;text-align:center;">Attended?</th>
+            <th style="padding:10px;text-align:center;">Actions</th>
+        </tr></thead><tbody>`;
+    sorted.forEach(inv => {
+        const attColor = inv.attended===true?'#27ae60':inv.attended===false?'#e74c3c':'#f39c12';
+        const attLabel = inv.attended===true?'✅ Yes':inv.attended===false?'❌ No':'⏳ Pending';
+        h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">${inv.date}</td>
+            <td style="padding:8px;"><strong>${inv.subject || '—'}</strong>${inv.examDetails ? '<br><small>'+inv.examDetails+'</small>' : ''}</td>
+            <td style="padding:8px;">${inv.testType || '—'}</td>
+            <td style="padding:8px;">${inv.teacherName}<br><small>${inv.teacherInitials}</small></td>
+            <td style="padding:8px;">${inv.role}</td>
+            <td style="padding:8px;">${inv.venue||'—'}</td>
+            <td style="padding:8px;">${inv.session}</td>
+            <td style="padding:8px;text-align:center;">
+                <span style="color:${attColor};font-weight:bold;">${attLabel}</span><br>
+                <div style="margin-top:4px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap;">
+                    <button class="btn btn-success" style="padding:2px 8px;font-size:11px;"
+                            onclick="markInvigAttendance('${inv.id}', true)">✅ Attended</button>
+                    <button class="btn btn-danger" style="padding:2px 8px;font-size:11px;"
+                            onclick="markInvigAttendance('${inv.id}', false)">❌ Absent</button>
+                    <button class="btn btn-secondary" style="padding:2px 8px;font-size:11px;"
+                            onclick="resetInvigAttendance('${inv.id}')">🔄 Reset</button>
+                </div></td>
+            <td style="padding:8px;text-align:center;">
+                <div style="display:flex;gap:4px;justify-content:center;flex-wrap:wrap;">
+                    <button class="btn btn-primary" style="padding:2px 8px;font-size:11px;"
+                            onclick="editInvigAssignment('${inv.id}')">✏️ Edit</button>
+                    <button class="btn btn-danger" style="padding:2px 8px;font-size:11px;"
+                            onclick="deleteInvigAssignment('${inv.id}')">🗑️ Delete</button>
+                </div>
+            </td></tr>`;
+    });
+    el.innerHTML = h + '</tbody></table>';
+}
+
+function downloadInvigCSV() {
+    let csv = 'Date,Subject,Type of Test,Details,Teacher,Initials,Role,Venue,Session,Attended\n';
+    invigAssignments.forEach(inv => {
+        const att = inv.attended===true?'Yes':inv.attended===false?'No':'Pending';
+        csv += `"${inv.date}","${inv.subject||''}","${inv.testType||''}","${inv.examDetails||''}","${inv.teacherName}","${inv.teacherInitials}","${inv.role}","${inv.venue||''}","${inv.session}","${att}"\n`;
+    });
+    const blob = new Blob([csv],{type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='invigilator_assignments.csv'; a.click(); URL.revokeObjectURL(url);
+}
+
+// ── REPORTS ───────────────────────────────────────────────────────
+function populateReportTeacherDropdown() {
+    const sel = document.getElementById('taReportTeacher');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">All Teachers</option>' +
+        teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+}
+
+function clearTeacherAttReportFilters() {
+    document.getElementById('taReportType').value = 'summary';
+    document.getElementById('taReportFrom').value = '';
+    document.getElementById('taReportTo').value = '';
+    document.getElementById('taReportTeacher').value = '';
+    generateTeacherAttReport();
+}
+
+function generateTeacherAttReport() {
+    const type     = document.getElementById('taReportType')?.value || 'summary';
+    const from     = document.getElementById('taReportFrom')?.value || '';
+    const to       = document.getElementById('taReportTo')?.value   || '';
+    const filterId = document.getElementById('taReportTeacher')?.value || '';
+    const sec      = document.getElementById('taReportSection');
+    if (!sec) return;
+
+    if (type === 'summary') {
+        const rows = teachers.filter(t => !filterId || String(t.id)===filterId).map(t => {
+            let cp=0,ca=0,cl=0,ce=0,sp=0,sa=0,sl=0;
+            Object.keys(teacherClassAttRecords).forEach(key => {
+                const date=key.split('_')[0];
+                if ((from&&date<from)||(to&&date>to)) return;
+                const r=teacherClassAttRecords[key][t.id]; if(!r) return;
+                if(r.status==='Present') cp++; else if(r.status==='Absent') ca++;
+                else if(r.status==='Late') cl++; else if(r.status==='Excused') ce++;
+            });
+            Object.keys(teacherPresenceRecords).forEach(date => {
+                if ((from&&date<from)||(to&&date>to)) return;
+                const r=teacherPresenceRecords[date][t.id]; if(!r) return;
+                if(r.status==='Present') sp++; else if(r.status==='Absent') sa++;
+                else if(r.status==='Late') sl++;
+            });
+            const invigs = invigAssignments.filter(i =>
+                String(i.teacherId)===String(t.id) && (!from||i.date>=from) && (!to||i.date<=to));
+            return { t, cp,ca,cl,ce, sp,sa,sl, invigs:invigs.length, invigAtt:invigs.filter(i=>i.attended===true).length };
+        });
+        let h = `<table style="width:100%;border-collapse:collapse;margin-top:10px;">
+            <thead><tr style="background:rgba(255,255,255,0.15);">
+                <th style="padding:10px;">Teacher</th>
+                <th style="padding:10px;text-align:center;" colspan="4">Class Attendance</th>
+                <th style="padding:10px;text-align:center;" colspan="3">School Presence</th>
+                <th style="padding:10px;text-align:center;" colspan="2">Invigilation</th>
+            </tr><tr style="background:rgba(255,255,255,0.08);">
+                <th style="padding:8px;"></th>
+                <th style="padding:8px;">Present</th><th style="padding:8px;">Absent</th>
+                <th style="padding:8px;">Late</th><th style="padding:8px;">Excused</th>
+                <th style="padding:8px;">Present</th><th style="padding:8px;">Absent</th><th style="padding:8px;">Late</th>
+                <th style="padding:8px;">Assigned</th><th style="padding:8px;">Attended</th>
+            </tr></thead><tbody>`;
+        rows.forEach(r => {
+            h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <td style="padding:8px;"><strong>${r.t.name}</strong><br><small>${r.t.initials}</small></td>
+                <td style="padding:8px;text-align:center;color:#27ae60;">${r.cp}</td>
+                <td style="padding:8px;text-align:center;color:#e74c3c;">${r.ca}</td>
+                <td style="padding:8px;text-align:center;color:#f39c12;">${r.cl}</td>
+                <td style="padding:8px;text-align:center;color:#3498db;">${r.ce}</td>
+                <td style="padding:8px;text-align:center;color:#27ae60;">${r.sp}</td>
+                <td style="padding:8px;text-align:center;color:#e74c3c;">${r.sa}</td>
+                <td style="padding:8px;text-align:center;color:#f39c12;">${r.sl}</td>
+                <td style="padding:8px;text-align:center;">${r.invigs}</td>
+                <td style="padding:8px;text-align:center;color:#27ae60;">${r.invigAtt}</td>
+            </tr>`;
+        });
+        sec.innerHTML = h + '</tbody></table>';
+
+    } else if (type === 'daily') {
+        const allDates = new Set([
+            ...Object.keys(teacherClassAttRecords).map(k=>k.split('_')[0]),
+            ...Object.keys(teacherPresenceRecords)
+        ]);
+        const dates = [...allDates].filter(d=>(!from||d>=from)&&(!to||d<=to)).sort();
+        if (dates.length===0) { sec.innerHTML='<div class="alert alert-info">No records found for selected range.</div>'; return; }
+        let h = '';
+        dates.forEach(date => {
+            h += `<div style="margin-bottom:16px;"><strong>📅 ${date}</strong>
+                <table style="width:100%;border-collapse:collapse;margin-top:6px;">
+                <thead><tr style="background:rgba(255,255,255,0.15);">
+                    <th style="padding:8px;">Teacher</th>
+                    <th style="padding:8px;text-align:center;">School Presence</th>
+                    <th style="padding:8px;text-align:center;">Sign In</th>
+                    <th style="padding:8px;text-align:center;">Sign Out</th>
+                    <th style="padding:8px;">Class Attendance</th>
+                </tr></thead><tbody>`;
+            teachers.filter(t=>!filterId||String(t.id)===filterId).forEach(t => {
+                const pres=(teacherPresenceRecords[date]||{})[t.id]||{};
+                const classStats=Object.keys(teacherClassAttRecords)
+                    .filter(k=>k.startsWith(date+'_'))
+                    .map(k=>{const r=teacherClassAttRecords[k][t.id];return r?`${k.split('_').slice(1).join('_')}: ${r.status}`:null;})
+                    .filter(Boolean).join(', ')||'—';
+                h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                    <td style="padding:8px;"><strong>${t.name}</strong></td>
+                    <td style="padding:8px;text-align:center;">${pres.status||'—'}</td>
+                    <td style="padding:8px;text-align:center;">${pres.signIn||'—'}</td>
+                    <td style="padding:8px;text-align:center;">${pres.signOut||'—'}</td>
+                    <td style="padding:8px;">${classStats}</td>
+                </tr>`;
+            });
+            h += '</tbody></table></div>';
+        });
+        sec.innerHTML = h;
+
+    } else if (type === 'invig') {
+        const filtered = invigAssignments
+            .filter(i=>(!from||i.date>=from)&&(!to||i.date<=to)&&(!filterId||String(i.teacherId)===filterId))
+            .sort((a,b)=>b.date.localeCompare(a.date));
+        if (filtered.length===0) { sec.innerHTML='<div class="alert alert-info">No invigilator records found.</div>'; return; }
+        let h = `<table style="width:100%;border-collapse:collapse;">
+            <thead><tr style="background:rgba(255,255,255,0.15);">
+                <th style="padding:10px;">Date</th><th style="padding:10px;">Exam/Test</th>
+                <th style="padding:10px;">Teacher</th><th style="padding:10px;">Role</th>
+                <th style="padding:10px;">Venue</th><th style="padding:10px;">Session</th>
+                <th style="padding:10px;text-align:center;">Attended</th>
+            </tr></thead><tbody>`;
+        filtered.forEach(inv => {
+            const att=inv.attended===true?'✅ Yes':inv.attended===false?'❌ No':'⏳ Pending';
+            h += `<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <td style="padding:8px;">${inv.date}</td>
+                <td style="padding:8px;"><strong>${inv.examName}</strong></td>
+                <td style="padding:8px;">${inv.teacherName} (${inv.teacherInitials})</td>
+                <td style="padding:8px;">${inv.role}</td>
+                <td style="padding:8px;">${inv.venue||'—'}</td>
+                <td style="padding:8px;">${inv.session}</td>
+                <td style="padding:8px;text-align:center;">${att}</td>
+            </tr>`;
+        });
+        sec.innerHTML = h + '</tbody></table>';
+    }
+}
+
+function downloadTeacherAttReportCSV() {
+    const type = document.getElementById('taReportType')?.value || 'summary';
+    let csv = '';
+    if (type==='summary') {
+        csv='Teacher,Initials,Class Present,Class Absent,Class Late,Class Excused,School Present,School Absent,School Late,Invigs Assigned,Invigs Attended\n';
+        teachers.forEach(t => {
+            let cp=0,ca=0,cl=0,ce=0,sp=0,sa=0,sl=0;
+            Object.values(teacherClassAttRecords).forEach(day=>{const r=day[t.id];if(!r)return;if(r.status==='Present')cp++;else if(r.status==='Absent')ca++;else if(r.status==='Late')cl++;else if(r.status==='Excused')ce++;});
+            Object.values(teacherPresenceRecords).forEach(day=>{const r=day[t.id];if(!r)return;if(r.status==='Present')sp++;else if(r.status==='Absent')sa++;else if(r.status==='Late')sl++;});
+            const inv=invigAssignments.filter(i=>String(i.teacherId)===String(t.id));
+            csv+=`"${t.name}","${t.initials}",${cp},${ca},${cl},${ce},${sp},${sa},${sl},${inv.length},${inv.filter(i=>i.attended===true).length}\n`;
+        });
+    } else if (type==='invig') {
+        csv='Date,Exam/Test,Teacher,Initials,Role,Venue,Session,Attended\n';
+        invigAssignments.forEach(inv=>{
+            const att=inv.attended===true?'Yes':inv.attended===false?'No':'Pending';
+            csv+=`"${inv.date}","${inv.examName}","${inv.teacherName}","${inv.teacherInitials}","${inv.role}","${inv.venue||''}","${inv.session}","${att}"\n`;
+        });
+    }
+    if (!csv) { alert('No data to export.'); return; }
+    const blob=new Blob([csv],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download=`teacher_att_${type}.csv`; a.click(); URL.revokeObjectURL(url);
+}
+
+function printTeacherAttReport() {
+    const content = document.getElementById('taReportSection')?.innerHTML || '';
+    const w = window.open('','_blank');
+    w.document.write(`<html><head><title>Teacher Attendance Report</title>
+        <style>body{font-family:Arial;padding:20px;}table{width:100%;border-collapse:collapse;}
+        th,td{border:1px solid #ccc;padding:8px;text-align:left;font-size:12px;}th{background:#f0f0f0;}</style></head>
+        <body><h2>Teacher Attendance Report — Atweaman Senior High School</h2>
+        <p>Generated: ${new Date().toLocaleString()}</p>${content}</body></html>`);
+    w.document.close(); w.print();
+}
+// ── END TEACHER ATTENDANCE & INVIGILATOR TRACKING ────────────────
 
 // ========================================
 // DAILY ACCESS CONTROL — ADMIN FUNCTIONS
